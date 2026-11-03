@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MANIJA · DJ</title>
+<meta name="description" content="MANIJA es el proyecto de Gabriel Giraldi, DJ argentino residente en Crush (Playa de San Juan, Alicante). Una experiencia, no un género: house en todas sus formas. Booking abierto.">
+<meta property="og:title" content="MANIJA · DJ">
+<meta property="og:description" content="La música fluye, la pista decide. DJ residente en Crush, Alicante.">
+<meta property="og:image" content="https://manijadj.com/img/hero.jpg">
+<meta property="og:url" content="https://manijadj.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://manijadj.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-weight='300' font-size='38' text-anchor='middle' fill='%23ececec'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-2: #141414;
+    --line: #242424;
+    --text: #ececec;
+    --muted: #9a9a9a;
+    --dim: #5e5e5e;
+    --light: #e8c48e;
+    --max: 1180px;
+    --photo: saturate(.75) brightness(.85);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: Montserrat, system-ui, sans-serif; font-weight: 300; font-size: 15px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+  body.locked { overflow: hidden; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .caps { text-transform: uppercase; letter-spacing: .3em; }
+
+  /* ---------- Portada ---------- */
+  .home { position: fixed; inset: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: clamp(28px, 5vh, 52px) 16px clamp(26px, 5vh, 48px); }
+  .home-bg, .home-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 0%; filter: var(--photo); }
+  .home-bg { background: url("img/hero.jpg") 62% 0% / cover; }
+  .home::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(10,10,10,.7) 0%, rgba(10,10,10,0) 24%, rgba(10,10,10,0) 52%, rgba(10,10,10,.55) 72%, rgba(10,10,10,.92) 100%); }
+  .home > .logo, .home > .home-bottom { position: relative; z-index: 1; }
+  .logo { margin: 0; font-weight: 200; font-size: clamp(38px, 7vw, 88px); line-height: 1; letter-spacing: .3em; margin-right: -.3em; }
+  .home-bottom { display: flex; flex-direction: column; align-items: center; gap: clamp(18px, 3vh, 28px); width: 100%; }
+  .motto { margin: 0; font-family: "Herr Von Muellerhoff", cursive; font-weight: 400; font-size: clamp(40px, 5.4vw, 70px); line-height: 1.05; color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.55); padding: 0 8px; }
+  .menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 34px; list-style: none; margin: 0; padding: 0; }
+  .menu a { text-decoration: none; font-size: 12px; font-weight: 400; letter-spacing: .32em; text-transform: uppercase; color: var(--text); padding: 6px 0; border-bottom: 1px solid transparent; transition: border-color .3s, color .3s; }
+  .menu a:hover, .menu a:focus-visible { border-color: var(--text); outline: none; }
+  .menu a.book { color: var(--light); }
+  .menu a.book:hover { border-color: var(--light); }
+  .home-sub { font-size: 10.5px; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  .icons { display: flex; gap: 22px; justify-content: center; }
+  .icons a { opacity: .7; transition: opacity .2s; }
+  .icons a:hover { opacity: 1; }
+  .icons svg { width: 18px; height: 18px; fill: var(--text); display: block; }
+
+  /* ---------- Secciones (capas) ---------- */
+  .panel { position: fixed; inset: 0; z-index: 10; background: var(--bg); overflow-y: auto; opacity: 0; visibility: hidden; transform: translateY(24px); transition: opacity .45s ease, transform .45s ease, visibility 0s linear .45s; -webkit-overflow-scrolling: touch; }
+  .panel.open { opacity: 1; visibility: visible; transform: none; transition: opacity .45s ease, transform .45s ease; }
+  .bar { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; height: 70px; padding: 0 clamp(16px, 4vw, 40px); background: rgba(10,10,10,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .bar .mini { font-weight: 200; font-size: 18px; letter-spacing: .3em; text-decoration: none; }
+  .bar nav { display: flex; gap: 26px; }
+  .bar nav a { text-decoration: none; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); }
+  .bar nav a.on, .bar nav a:hover { color: var(--text); }
+  .close { display: flex; align-items: center; gap: 10px; background: none; border: 0; color: var(--text); cursor: pointer; font: 400 11px Montserrat, sans-serif; letter-spacing: .28em; text-transform: uppercase; padding: 10px 0; text-decoration: none; }
+  .close span { font-size: 22px; line-height: 1; letter-spacing: 0; font-weight: 200; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: clamp(56px, 9vh, 96px) clamp(16px, 4vw, 40px) 110px; }
+  .label { font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); font-weight: 400; margin: 0 0 18px; }
+  h2 { font-weight: 200; font-size: clamp(32px, 4.6vw, 56px); letter-spacing: .14em; text-transform: uppercase; line-height: 1.1; margin: 0 0 44px; }
+
+  /* Sesiones */
+  .video { position: relative; aspect-ratio: 16/9; overflow: hidden; background: #000; cursor: pointer; border: 0; padding: 0; width: 100%; display: block; color: var(--text); }
+  .video img { width: 100%; height: 100%; object-fit: cover; filter: var(--photo); transition: filter .6s, transform .8s; }
+  .video:hover img { filter: none; transform: scale(1.03); }
+  .video .play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 58px; height: 58px; border: 1px solid rgba(236,236,236,.75); border-radius: 50%; display: grid; place-items: center; transition: background .3s; }
+  .video:hover .play { background: rgba(236,236,236,.14); }
+  .video .play::after { content: ""; border-left: 12px solid var(--text); border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 4px; }
+  .video .dur { position: absolute; right: 10px; bottom: 8px; font-size: 11px; letter-spacing: .08em; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .featured { margin-bottom: 56px; }
+  .cap { display: flex; justify-content: space-between; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+  .cap h3 { margin: 0; font-weight: 400; font-size: 15px; letter-spacing: .2em; text-transform: uppercase; }
+  .cap p { margin: 0; color: var(--muted); font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px 18px; }
+  .card h4 { margin: 12px 0 0; font-weight: 400; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+  .more { display: inline-block; margin-top: 56px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  .more:hover { color: var(--text); border-color: var(--text); }
+
+  /* Fechas */
+  .gigs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .gigs li { display: grid; grid-template-columns: 150px 1fr 1fr; gap: 24px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .gigs .date { color: var(--muted); font-size: 13px; letter-spacing: .12em; }
+  .gigs .date.res { color: var(--light); letter-spacing: .24em; font-size: 11px; }
+  .gigs .name { font-weight: 400; letter-spacing: .16em; text-transform: uppercase; font-size: 14px; }
+  .gigs .name em { display: block; font-style: normal; text-transform: none; letter-spacing: .02em; color: var(--dim); font-size: 13px; font-weight: 300; margin-top: 2px; }
+  .gigs .place { color: var(--muted); text-align: right; font-size: 13px; }
+  .gigs .place a { text-decoration: none; border-bottom: 1px solid var(--line); }
+  .gigs .place a:hover { color: var(--text); border-color: var(--text); }
+  .note { margin-top: 32px; color: var(--muted); font-size: 13px; }
+  .note a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--dim); }
+
+  /* Galería */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .gallery button { display: block; width: 100%; aspect-ratio: 4/5; padding: 0; border: 0; overflow: hidden; cursor: zoom-in; background: var(--bg-2); }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; filter: var(--photo); transition: filter .6s, transform .8s; }
+  .gallery button:hover img { filter: none; transform: scale(1.02); }
+  .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(5,5,5,.96); display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; }
+
+  /* Bio */
+  .bio { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(40px, 7vw, 90px); align-items: start; }
+  .bio-img { aspect-ratio: 4/5; background: url("img/bio.jpg") center 20% / cover; filter: var(--photo); }
+  .bio h2 { margin-bottom: 28px; }
+  .bio p { color: var(--muted); margin: 0 0 18px; }
+  .bio p.lead { color: var(--text); font-size: 18px; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 40px; border-top: 1px solid var(--line); }
+  .facts div { padding: 20px 0 0; }
+  .facts div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+  .facts span { display: block; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+  .facts strong { font-weight: 400; font-size: 14px; }
+
+  /* Booking */
+  .booking { min-height: calc(100vh - 70px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 16px 80px; }
+  .booking .motto { font-size: clamp(38px, 5vw, 60px); margin-bottom: 40px; text-shadow: none; }
+  .mail { display: inline-block; font-weight: 300; font-size: clamp(18px, 3vw, 34px); letter-spacing: .04em; text-decoration: none; border-bottom: 1px solid var(--dim); padding-bottom: 6px; transition: border-color .3s; word-break: break-all; }
+  .mail:hover { border-color: var(--light); }
+  .alt { margin: 24px 0 0; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); }
+  .alt a { text-decoration: none; color: var(--text); }
+  .booking .icons { margin-top: 56px; }
+
+  @media (max-width: 960px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .bio { grid-template-columns: 1fr; }
+    .bio-img { aspect-ratio: 1/1; }
+    .bar nav { display: none; }
+  }
+  @media (max-width: 640px) {
+    .menu { gap: 8px 22px; }
+    .menu a { font-size: 11px; letter-spacing: .26em; }
+    .gigs li { grid-template-columns: 1fr; gap: 4px; }
+    .gigs .place { text-align: left; }
+    .facts { grid-template-columns: 1fr; }
+    .facts div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); margin-top: 18px; }
+    .grid { gap: 26px 12px; }
+    .card h4 { font-size: 10.5px; letter-spacing: .12em; }
+    .card .video .play { width: 40px; height: 40px; }
+    .card .video .play::after { border-left-width: 9px; border-top-width: 5px; border-bottom-width: 5px; margin-left: 3px; }
+    .card .video .dur { font-size: 10px; right: 6px; bottom: 4px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .panel, .panel.open { transition: none; transform: none; } }
+</style>
+</head>
+<body>
+
+<!-- ================= PORTADA ================= -->
+<header class="home" id="home">
+  <div class="home-bg" role="img" aria-label="MANIJA al atardecer en Benidorm"></div>
+  <!-- Si existe video/hero.mp4 se reproduce en bucle; si no, se ve la foto -->
+  <video class="home-video" autoplay muted loop playsinline preload="metadata" poster="img/hero.jpg" aria-hidden="true">
+    <source src="video/hero.mp4" type="video/mp4">
+  </video>
+
+  <h1 class="logo">MANIJA</h1>
+
+  <div class="home-bottom">
+    <p class="motto">la música fluye, la pista decide...</p>
+    <nav aria-label="Secciones">
+      <ul class="menu">
+        <li><a href="#sesiones">Sesiones</a></li>
+        <li><a href="#fechas">Fechas</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#bio">Bio</a></li>
+        <li><a href="#booking" class="book">Booking</a></li>
+      </ul>
+    </nav>
+    <p class="home-sub">DJ residente en Crush · Alicante</p>
+  </div>
+</header>
+
+<!-- ================= SESIONES ================= -->
+<section class="panel" id="sesiones" aria-label="Sesiones">
+  <div class="bar">
+    <a href="#" class="mini" data-close>MANIJA</a>
+    <nav><a href="#sesiones" class="on">Sesiones</a><a href="#fechas">Fechas</a><a href="#galeria">Galería</a><a href="#bio">Bio</a><a href="#booking">Booking</a></nav>
+    <a href="#" class="close" data-close>Cerrar <span>×</span></a>
+  </div>
+  <div class="wrap">
+    <p class="label">Sesiones</p>
+    <h2>Escuchar</h2>
+    <div class="featured">
+      <button class="video" data-id="iDIWvjXSx4c" aria-label="Reproducir Sunset Session #2">
+        <img src="https://i.ytimg.com/vi/iDIWvjXSx4c/maxresdefault.jpg" onerror="this.src='https://i.ytimg.com/vi/iDIWvjXSx4c/hqdefault.jpg'" alt="" loading="lazy">
+        <span class="play"></span><span class="dur">1:52:54</span>
+      </button>
+      <div class="cap"><h3>Sunset Session #2</h3><p>Live set · Benidorm</p></div>
+    </div>
+    <div class="grid">
+      <div class="card"><button class="video" data-id="gi2lMIYSOrY" aria-label="Reproducir Bonfire Session"><img src="https://i.ytimg.com/vi/gi2lMIYSOrY/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span><span class="dur">1:01:42</span></button><h4>Bonfire Session</h4></div>
+      <div class="card"><button class="video" data-id="p1OHEY9iyfs" aria-label="Reproducir Mountain Session"><img src="https://i.ytimg.com/vi/p1OHEY9iyfs/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span><span class="dur">1:06:55</span></button><h4>Mountain Session</h4></div>
+      <div class="card"><button class="video" data-id="Rv7VIq7ePdw" aria-label="Reproducir Introspective Session"><img src="https://i.ytimg.com/vi/Rv7VIq7ePdw/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span><span class="dur">1:08:11</span></button><h4>Introspective Session</h4></div>
+      <div class="card"><button class="video" data-id="c3FxjWS1ZKI" aria-label="Reproducir Rain Session"><img src="https://i.ytimg.com/vi/c3FxjWS1ZKI/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span><span class="dur">59:04</span></button><h4>Rain Session</h4></div>
+      <div class="card"><button class="video" data-id="5sUQq93kIk8" aria-label="Reproducir Morning Session"><img src="https://i.ytimg.com/vi/5sUQq93kIk8/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span><span class="dur">1:02:10</span></button><h4>Morning Session</h4></div>
+      <div class="card"><button class="video" data-id="Nam_MmUeatM" aria-label="Reproducir Forest Session"><img src="https://i.ytimg.com/vi/Nam_MmUeatM/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span><span class="dur">48:00</span></button><h4>Forest Session</h4></div>
+      <div class="card"><button class="video" data-id="x-y2KbLB4I8" aria-label="Reproducir Nature Session"><img src="https://i.ytimg.com/vi/x-y2KbLB4I8/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span><span class="dur">51:55</span></button><h4>Nature Session</h4></div>
+      <div class="card"><button class="video" data-id="gOqs0I4g2mc" aria-label="Reproducir Sunset Session #1"><img src="https://i.ytimg.com/vi/gOqs0I4g2mc/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span><span class="dur">1:19:21</span></button><h4>Sunset Session #1</h4></div>
+    </div>
+    <a class="more" href="https://www.youtube.com/@manija_dj" target="_blank" rel="noopener">Ver todas en YouTube</a>
+  </div>
+</section>
+
+<!-- ================= FECHAS ================= -->
+<section class="panel" id="fechas" aria-label="Fechas">
+  <div class="bar">
+    <a href="#" class="mini" data-close>MANIJA</a>
+    <nav><a href="#sesiones">Sesiones</a><a href="#fechas" class="on">Fechas</a><a href="#galeria">Galería</a><a href="#bio">Bio</a><a href="#booking">Booking</a></nav>
+    <a href="#" class="close" data-close>Cerrar <span>×</span></a>
+  </div>
+  <div class="wrap">
+    <p class="label">Fechas</p>
+    <h2>En vivo</h2>
+    <ul class="gigs">
+      <li><span class="date res">RESIDENTE</span><span class="name">Cadenza<em>High energy brunch · sábados y domingos</em></span><span class="place"><a href="https://www.crushculture.es/es/sound" target="_blank" rel="noopener">Crush, Playa de San Juan</a></span></li>
+      <li><span class="date">13.08.2026</span><span class="name">Sesión de noche</span><span class="place">Kiki García, Alicante</span></li>
+      <li><span class="date">12.08.2026</span><span class="name">Eclipse Party</span><span class="place">Kiki García, Alicante</span></li>
+      <li><span class="date">30.05.2026</span><span class="name">BOIA</span><span class="place"><a href="https://boiaplanet.net/" target="_blank" rel="noopener">Alicante</a></span></li>
+      <li><span class="date">23.10.2025</span><span class="name">Afro Sunset</span><span class="place">Benidorm</span></li>
+    </ul>
+    <p class="note">Próximas fechas en preparación. Para reservar: <a href="#booking">booking</a>.</p>
+  </div>
+</section>
+
+<!-- ================= GALERÍA ================= -->
+<section class="panel" id="galeria" aria-label="Galería">
+  <div class="bar">
+    <a href="#" class="mini" data-close>MANIJA</a>
+    <nav><a href="#sesiones">Sesiones</a><a href="#fechas">Fechas</a><a href="#galeria" class="on">Galería</a><a href="#bio">Bio</a><a href="#booking">Booking</a></nav>
+    <a href="#" class="close" data-close>Cerrar <span>×</span></a>
+  </div>
+  <div class="wrap">
+    <p class="label">Galería</p>
+    <h2>Momentos</h2>
+    <div class="gallery" id="gallery">
+      <button><img src="img/live-pista.jpg" alt="MANIJA en cabina con la pista bailando" loading="lazy"></button>
+      <button><img src="img/crush-sonrisa.jpg" alt="MANIJA en cabina bajo las buganvillas de Crush" loading="lazy"></button>
+      <button><img src="img/sunset-contraluz.jpg" alt="MANIJA pinchando a contraluz al atardecer" loading="lazy"></button>
+      <button><img src="img/live-publico.jpg" alt="Vista desde la cabina hacia el público" loading="lazy"></button>
+      <button><img src="img/sunset-bn.jpg" alt="MANIJA junto al mar" loading="lazy"></button>
+      <button><img src="img/crush-cabina.jpg" alt="MANIJA en la cabina de Crush" loading="lazy"></button>
+      <button><img src="img/live-manos.jpg" alt="Manos en el mixer" loading="lazy"></button>
+      <button><img src="img/sunset-rosa.jpg" alt="MANIJA con el cielo del atardecer de fondo" loading="lazy"></button>
+      <button><img src="img/live-energia.jpg" alt="MANIJA sonriendo en cabina" loading="lazy"></button>
+      <button><img src="img/crush-sala.jpg" alt="Vista desde la cabina hacia la terraza de Crush" loading="lazy"></button>
+      <button><img src="img/sunset-montana.jpg" alt="MANIJA con auriculares frente a la montaña" loading="lazy"></button>
+      <button><img src="img/live-cabina.jpg" alt="MANIJA en cabina con gente alrededor" loading="lazy"></button>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox" aria-hidden="true"><img alt=""></div>
+
+<!-- ================= BIO ================= -->
+<section class="panel" id="bio" aria-label="Bio">
+  <div class="bar">
+    <a href="#" class="mini" data-close>MANIJA</a>
+    <nav><a href="#sesiones">Sesiones</a><a href="#fechas">Fechas</a><a href="#galeria">Galería</a><a href="#bio" class="on">Bio</a><a href="#booking">Booking</a></nav>
+    <a href="#" class="close" data-close>Cerrar <span>×</span></a>
+  </div>
+  <div class="wrap bio">
+    <div class="bio-img" role="img" aria-label="Retrato de Gabriel Giraldi junto al mar"></div>
+    <div>
+      <p class="label">Bio</p>
+      <h2>Una experiencia, no un género</h2>
+      <p class="lead">MANIJA nace de una búsqueda: hacer bailar sin perder la emoción.</p>
+      <p>Detrás del proyecto está Gabriel Giraldi, DJ argentino que entiende la música como expresión del alma. Su sonido no se encierra en un género: groove, luz y una pista que no se detiene.</p>
+      <p>MANIJA lee el momento y deja que la música fluya: sets que comienzan suaves, crecen junto al público y terminan en lo más alto. Sus sesiones grabadas al aire libre, en atardeceres, bosques y montañas, son parte de su sello.</p>
+      <p>Es uno de los DJs residentes de Crush, en la Playa de San Juan (Alicante), donde pincha en Cadenza, su high energy brunch de fin de semana.</p>
+      <div class="facts">
+        <div><span>Enfoque</span><strong>La pista decide</strong></div>
+        <div><span>Residencia</span><strong>Crush · San Juan</strong></div>
+        <div><span>Base</span><strong>Alicante, España</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section class="panel" id="booking" aria-label="Booking">
+  <div class="bar">
+    <a href="#" class="mini" data-close>MANIJA</a>
+    <nav><a href="#sesiones">Sesiones</a><a href="#fechas">Fechas</a><a href="#galeria">Galería</a><a href="#bio">Bio</a><a href="#booking" class="on">Booking</a></nav>
+    <a href="#" class="close" data-close>Cerrar <span>×</span></a>
+  </div>
+  <div class="booking">
+    <p class="label">Booking &amp; contacto</p>
+    <p class="motto">hagamos que suene...</p>
+    <a class="mail" href="mailto:gaby.manija.dj@gmail.com?subject=Booking%20MANIJA">gaby.manija.dj@gmail.com</a>
+    <p class="alt">o por <a href="https://api.whatsapp.com/send?phone=34612236295&amp;text=Hola%20MANIJA%2C%20quiero%20hablar%20de%20una%20fecha" target="_blank" rel="noopener">WhatsApp</a></p>
+    <div class="icons">
+      <a href="https://www.instagram.com/manija_dj" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg></a>
+      <a href="https://www.youtube.com/@manija_dj" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+      <a href="https://soundcloud.com/gabriel-giraldi-291282282" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M1.2 14.4l.3 2.1-.3 2c0 .1-.1.2-.2.2s-.1-.1-.2-.2L.6 16.5l.2-2.1c0-.1.1-.2.2-.2s.2.1.2.2zm1.4-1.2l.4 3.3-.4 3.2c0 .1-.1.2-.2.2s-.2-.1-.2-.2l-.3-3.2.3-3.3c0-.1.1-.2.2-.2s.2.1.2.2zm1.5-.6l.4 3.9-.4 3.7c0 .2-.1.3-.3.3-.1 0-.2-.1-.3-.3l-.3-3.7.3-3.9c0-.2.1-.3.3-.3.1 0 .3.1.3.3zm1.5-.2l.3 4.1-.3 3.8c0 .2-.2.3-.3.3-.2 0-.3-.1-.3-.3l-.3-3.8.3-4.1c0-.2.1-.3.3-.3.1 0 .3.1.3.3zm1.6.4l.3 3.7-.3 3.8c0 .2-.2.4-.4.4s-.3-.2-.4-.4l-.2-3.8.2-3.7c0-.2.2-.4.4-.4s.4.2.4.4zm1.6-2.7l.3 6.4-.3 3.8c0 .2-.2.4-.4.4s-.4-.2-.4-.4l-.3-3.8.3-6.4c0-.2.2-.4.4-.4s.4.2.4.4zm1.6-1l.2 7.4-.2 3.7c0 .3-.2.5-.5.5s-.4-.2-.5-.5l-.2-3.7.2-7.4c0-.3.2-.5.5-.5s.5.2.5.5zm1.7-.6l.2 8-.2 3.7c0 .3-.3.5-.5.5-.3 0-.5-.2-.5-.5l-.2-3.7.2-8c0-.3.2-.5.5-.5s.5.2.5.5zM24 16.1a3.5 3.5 0 01-3.5 3.5h-8c-.3 0-.5-.2-.5-.5V7.9c0-.2.1-.4.4-.5a6 6 0 019.1 4.9 3.5 3.5 0 012.5 3.8z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Secciones: cada botón abre su capa; la dirección (#sesiones, #fechas…) permite volver atrás y compartir enlaces
+  const panels = [...document.querySelectorAll('.panel')];
+  function show() {
+    const id = location.hash.slice(1);
+    let found = false;
+    panels.forEach(p => {
+      const on = p.id === id;
+      p.classList.toggle('open', on);
+      if (on) { found = true; p.scrollTop = 0; }
+    });
+    document.body.classList.toggle('locked', found);
+    if (!found) panels.forEach(p => p.querySelectorAll('iframe').forEach(f => f.remove()));
+  }
+  window.addEventListener('hashchange', show);
+  show();
+
+  // Cerrar: vuelve a la portada
+  document.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    history.pushState('', document.title, location.pathname + location.search);
+    show();
+  }));
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (lb.classList.contains('open')) { lb.classList.remove('open'); return; }
+    if (location.hash) { history.pushState('', document.title, location.pathname + location.search); show(); }
+  });
+  window.addEventListener('popstate', show);
+
+  // Vídeos: cargan YouTube solo al pulsar play
+  document.querySelectorAll('.video').forEach(v => v.addEventListener('click', () => {
+    if (v.querySelector('iframe')) return;
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + v.dataset.id + '?autoplay=1&rel=0';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    f.title = v.getAttribute('aria-label');
+    v.appendChild(f);
+  }));
+
+  // Galería: ampliar foto al pulsar
+  const lb = document.getElementById('lightbox');
+  document.querySelectorAll('#gallery button').forEach(b => b.addEventListener('click', () => {
+    const img = b.querySelector('img');
+    lb.querySelector('img').src = img.src; lb.querySelector('img').alt = img.alt;
+    lb.classList.add('open');
+  }));
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+</script>
+</body>
+</html>
