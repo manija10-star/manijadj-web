@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MANIJA · Press kit</title>
+<style>
+  /* Press kit A4 (se imprime a PDF). ?lang=en muestra la versión en inglés.
+     Para cambiar fotos: sustituye los archivos de ../img/ o cambia las rutas de abajo. */
+  @font-face { font-family: "Montserrat"; font-weight: 100 900; src: url(../fonts/montserrat-latin-wght-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Herr Von Muellerhoff"; font-weight: 400; src: url(../fonts/herr-von-muellerhoff-latin-400-normal.woff2) format("woff2"); }
+  @page { size: A4; margin: 0; }
+  :root { --bg: #0a0a0a; --bg-2: #121212; --line: #262626; --text: #ececec; --muted: #9a9a9a; --dim: #6e6e6e; --gold: #e8c48e; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; background: #2a2a2a; }
+  body { font-family: Montserrat, Arial, sans-serif; font-weight: 300; color: var(--text); font-size: 9.6pt; line-height: 1.6; }
+  .page { position: relative; width: 210mm; height: 297mm; margin: 0 auto 10mm; background: var(--bg); overflow: hidden; page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: auto; break-after: auto; margin-bottom: 0; }
+  @media print { html, body { background: var(--bg); } .page { margin: 0; } }
+  body:not(.en) [data-l="en"], .en [data-l="es"] { display: none !important; }
+
+  .script { font-family: "Herr Von Muellerhoff", cursive; font-weight: 400; }
+  .label { font-size: 6.6pt; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin: 0 0 4mm; }
+  .label.grey { color: var(--muted); }
+  h2 { font-weight: 200; font-size: 26pt; line-height: 1.05; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 7mm; }
+  h3 { font-weight: 400; font-size: 8pt; letter-spacing: .26em; text-transform: uppercase; margin: 0 0 3mm; }
+  p { margin: 0 0 3.2mm; color: var(--muted); }
+  p.lead { color: var(--text); font-size: 12pt; line-height: 1.5; font-weight: 300; }
+  .foot { position: absolute; left: 16mm; right: 16mm; bottom: 10mm; display: flex; justify-content: space-between; font-size: 6.4pt; letter-spacing: .3em; text-transform: uppercase; color: var(--dim); }
+
+  /* ---------- 1 · Portada ---------- */
+  .cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,.85) 0%, rgba(10,10,10,.15) 26%, rgba(10,10,10,.15) 52%, rgba(10,10,10,.7) 72%, rgba(10,10,10,.97) 100%); }
+  .cover-top, .cover-bottom { position: absolute; left: 0; right: 0; z-index: 1; text-align: center; }
+  .cover-top { top: 17mm; }
+  .cover-top .pk { font-size: 6.6pt; letter-spacing: .5em; text-transform: uppercase; color: var(--gold); margin-bottom: 6mm; }
+  .cover h1 { margin: 0; font-weight: 200; font-size: 50pt; letter-spacing: .3em; margin-right: -.3em; line-height: 1; }
+  .cover-bottom { bottom: 22mm; }
+  .cover .motto { font-size: 31pt; line-height: 1.1; color: #fff; margin-bottom: 9mm; }
+  .cover .sub { font-size: 7.4pt; letter-spacing: .34em; text-transform: uppercase; color: var(--text); margin: 0 0 2.5mm; }
+  .cover .sub.dim { color: var(--muted); }
+
+  /* ---------- 2 · Bio ---------- */
+  .p2 { padding: 18mm 16mm 0; }
+  .bio { display: grid; grid-template-columns: 70mm 1fr; gap: 11mm; }
+  .bio-img { width: 70mm; height: 96mm; object-fit: cover; object-position: 55% 20%; }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 11mm 0 0; border-top: 1px solid var(--line); }
+  .pillars div { padding: 5mm 5mm 0 0; }
+  .pillars div + div { padding-left: 5mm; border-left: 1px solid var(--line); }
+  .pillars b { display: block; font-weight: 400; font-size: 8pt; letter-spacing: .26em; text-transform: uppercase; margin-bottom: 2mm; color: var(--text); }
+  .pillars p { font-size: 8.4pt; margin: 0; }
+  .concept { margin: 12mm 0 0; padding: 9mm 10mm; background: var(--bg-2); border: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; align-items: center; }
+  .concept .script { font-size: 26pt; line-height: 1.1; color: #fff; }
+  .concept p { margin: 0; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 11mm; border-top: 1px solid var(--line); }
+  .facts div { padding: 5mm 0 0; }
+  .facts div + div { padding-left: 5mm; border-left: 1px solid var(--line); }
+  .facts span { display: block; font-size: 6pt; letter-spacing: .3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5mm; }
+  .facts strong { font-weight: 400; font-size: 9pt; }
+
+  /* ---------- 3 · Directo, escuchar, rider, contacto ---------- */
+  .p3 { padding: 16mm 16mm 22mm; display: flex; flex-direction: column; }
+  .res { display: grid; grid-template-columns: 62mm 1fr; border: 1px solid var(--line); background: var(--bg-2); margin-bottom: 8mm; }
+  .res img { width: 62mm; height: 44mm; object-fit: cover; object-position: 50% 55%; }
+  .res-body { padding: 7mm 8mm; display: flex; flex-direction: column; justify-content: center; }
+  .res-body .big { font-weight: 200; font-size: 22pt; letter-spacing: .1em; text-transform: uppercase; line-height: 1; margin: 1mm 0 3mm; }
+  .res-body p { margin: 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+  ul.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  ul.list li { display: flex; justify-content: space-between; gap: 4mm; padding: 2mm 0; border-bottom: 1px solid var(--line); font-size: 8.4pt; }
+  ul.list li > * { color: var(--muted); text-align: right; }
+  ul.list li > :first-child, ul.list li > [data-l="es"]:first-child + [data-l="en"] { color: var(--text); text-align: left; white-space: nowrap; }
+  ul.list a { color: var(--text); text-decoration: none; }
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; margin: 7mm 0; }
+  .strip img { width: 100%; height: 38mm; object-fit: cover; }
+  .contact { margin-top: auto; padding-top: 6mm; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8mm; }
+  .contact .script { font-size: 27pt; line-height: 1; color: #fff; }
+  .contact .mail { font-size: 13pt; font-weight: 300; letter-spacing: .02em; color: var(--text); text-decoration: none; display: block; margin-top: 4mm; }
+  .contact .rows { text-align: right; font-size: 7.4pt; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); line-height: 2.1; }
+  .contact .rows a { color: var(--text); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- =============== 1 · PORTADA =============== -->
+<section class="page cover">
+  <img class="cover-img" src="../img/sunset-contraluz.jpg" alt="">
+  <div class="cover-top">
+    <div class="pk">Press kit · 2026</div>
+    <h1>MANIJA</h1>
+  </div>
+  <div class="cover-bottom">
+    <div class="motto script">la música fluye, la pista decide...</div>
+    <p class="sub"><span data-l="es">DJ · Alicante, España</span><span data-l="en">DJ · Alicante, Spain</span></p>
+    <p class="sub dim"><span data-l="es">Residente en Crush · Cadenza</span><span data-l="en">Resident at Crush · Cadenza</span></p>
+  </div>
+</section>
+
+<!-- =============== 2 · BIO =============== -->
+<section class="page p2">
+  <div class="bio">
+    <img class="bio-img" src="../img/metro-sonrisa.jpg" alt="">
+    <div>
+      <p class="label">Bio</p>
+      <h2 data-l="es">Una experiencia,<br>no un género</h2>
+      <h2 data-l="en">An experience,<br>not a genre</h2>
+      <p class="lead" data-l="es">MANIJA nace de una búsqueda: hacer bailar sin perder la emoción.</p>
+      <p class="lead" data-l="en">MANIJA was born from a simple search: making people dance without losing the emotion.</p>
+      <p data-l="es">Detrás del proyecto está Gabriel Giraldi, DJ argentino afincado en Alicante que entiende la música como expresión del alma. Su sonido no se encierra en un género: groove, luz y una pista que no se detiene.</p>
+      <p data-l="en">Behind the project is Gabriel Giraldi, an Argentinian DJ based in Alicante who sees music as an expression of the soul. His sound refuses to be boxed into a genre: groove, light and a dancefloor that never stops.</p>
+      <p data-l="es">MANIJA lee el momento y deja que la música fluya: sets que comienzan suaves, crecen junto al público y terminan en lo más alto. Sus sesiones grabadas al aire libre, en atardeceres, bosques y montañas, son parte de su sello.</p>
+      <p data-l="en">MANIJA reads the moment and lets the music flow: sets that start soft, grow with the crowd and end at the very top. His sessions recorded outdoors, at sunsets, in forests and on mountains, are part of his signature.</p>
+    </div>
+  </div>
+
+  <div class="concept">
+    <div class="script">la música fluye, la pista decide...</div>
+    <p data-l="es">Cada set se construye en directo, leyendo a la gente y al lugar. Del brunch al atardecer y del atardecer a la noche: no hay dos sets iguales, porque no hay dos momentos iguales.</p>
+    <p data-l="en">Every set is built live, reading the people and the place. From brunch to sunset and from sunset to night: no two sets are the same, because no two moments are the same.</p>
+  </div>
+
+  <div class="pillars">
+    <div><b data-l="es">Energía</b><b data-l="en">Energy</b><p data-l="es">Sets que arrancan cálidos, crecen con el público y terminan en lo más alto.</p><p data-l="en">Sets that start warm, grow with the crowd and finish at their peak.</p></div>
+    <div><b data-l="es">Fluidez</b><b data-l="en">Flow</b><p data-l="es">Transiciones naturales, sin cortes ni etiquetas. La música va donde la pista la lleva.</p><p data-l="en">Natural transitions, no cuts, no labels. The music goes where the floor takes it.</p></div>
+    <div><b data-l="es">Conexión</b><b data-l="en">Connection</b><p data-l="es">La música como puente entre cuerpo, mente y entorno. Good people find good people.</p><p data-l="en">Music as a bridge between body, mind and place. Good people find good people.</p></div>
+  </div>
+
+  <div class="facts">
+    <div><span data-l="es">Enfoque</span><span data-l="en">Approach</span><strong data-l="es">La pista decide</strong><strong data-l="en">The floor decides</strong></div>
+    <div><span data-l="es">Residencia</span><span data-l="en">Residency</span><strong>Crush · Playa de San Juan</strong></div>
+    <div><span>Base</span><strong data-l="es">Alicante, España</strong><strong data-l="en">Alicante, Spain</strong></div>
+  </div>
+
+  <div class="foot"><span>MANIJA · Press kit</span><span>manijadj.com</span></div>
+</section>
+
+<!-- =============== 3 · DIRECTO, ESCUCHAR, RIDER, CONTACTO =============== -->
+<section class="page p3">
+  <p class="label"><span data-l="es">En vivo</span><span data-l="en">Live</span></p>
+  <div class="res">
+    <img src="../img/crush-cabina.jpg" alt="">
+    <div class="res-body">
+      <p class="label" style="margin:0"><span data-l="es">Residente</span><span data-l="en">Resident DJ</span></p>
+      <div class="big">Cadenza</div>
+      <p data-l="es">High energy brunch · sábados y domingos<br>Crush, Playa de San Juan (Alicante)</p>
+      <p data-l="en">High energy brunch · Saturdays &amp; Sundays<br>Crush, Playa de San Juan (Alicante)</p>
+    </div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h3 data-l="es">Ha sonado en</h3><h3 data-l="en">Played at</h3>
+      <ul class="list">
+        <li><span>Crush · Cadenza</span><span data-l="es">Residente</span><span data-l="en">Resident</span></li>
+        <li><span>Kiki García</span><span>Alicante</span></li>
+        <li><span>BOIA</span><span>Alicante</span></li>
+        <li><span>Afro Sunset</span><span>Benidorm</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 data-l="es">Escuchar</h3><h3 data-l="en">Listen</h3>
+      <ul class="list">
+        <li><span>Sunset Session #2</span><span>YouTube · 1:52:54</span></li>
+        <li><a href="https://www.youtube.com/@manija_dj">YouTube</a><span>@manija_dj</span></li>
+        <li><a href="https://soundcloud.com/gabriel-giraldi-291282282">SoundCloud</a><span>Gabriel Giraldi</span></li>
+        <li><a href="https://www.instagram.com/manija_dj">Instagram</a><span>@manija_dj</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="strip">
+    <img src="../img/live-pista.jpg" alt="" style="object-position:50% 40%">
+    <img src="../img/metro-cabina.jpg" alt="" style="object-position:50% 35%">
+    <img src="../img/crush-sonrisa.jpg" alt="" style="object-position:50% 55%">
+  </div>
+
+  <div class="two">
+    <div>
+      <h3 data-l="es">Rider técnico</h3><h3 data-l="en">Technical rider</h3>
+      <ul class="list rider">
+        <li><span>2–3 × Pioneer CDJ-3000</span><span data-l="es">o CDJ-2000NXS2, enlazados (Pro DJ Link)</span><span data-l="en">or CDJ-2000NXS2, linked (Pro DJ Link)</span></li>
+        <li><span data-l="es">1 × mixer Pioneer</span><span data-l="en">1 × Pioneer mixer</span><span>DJM-A9 / DJM-V10 / DJM-900NXS2</span></li>
+        <li><span data-l="es">Monitores de cabina</span><span data-l="en">Booth monitors</span><span data-l="es">2, con volumen independiente</span><span data-l="en">2, independent volume</span></li>
+        <li><span data-l="es">Mesa de cabina</span><span data-l="en">DJ table</span><span data-l="es">estable y a la altura adecuada</span><span data-l="en">stable, at the right height</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 data-l="es">Material de prensa</h3><h3 data-l="en">Press material</h3>
+      <ul class="list">
+        <li><span data-l="es">Fotos en alta resolución</span><span data-l="en">High-res photos</span><span data-l="es">bajo petición</span><span data-l="en">on request</span></li>
+        <li><span data-l="es">Logo y bio</span><span data-l="en">Logo &amp; bio</span><span>manijadj.com</span></li>
+        <li><span data-l="es">Mezclas para promoción</span><span data-l="en">Promo mixes</span><span data-l="es">bajo petición</span><span data-l="en">on request</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contact">
+    <div>
+      <p class="label" style="margin-bottom:2mm">Booking</p>
+      <div class="script" data-l="es">hagamos que suene...</div>
+      <div class="script" data-l="en">let's make it sound...</div>
+      <a class="mail" href="mailto:gaby.manija.dj@gmail.com">gaby.manija.dj@gmail.com</a>
+    </div>
+    <div class="rows">
+      <div>WhatsApp · <a href="https://api.whatsapp.com/send?phone=34612236295">+34 612 236 295</a></div>
+      <div>Web · <a href="https://manijadj.com">manijadj.com</a></div>
+      <div>Instagram · <a href="https://www.instagram.com/manija_dj">@manija_dj</a></div>
+    </div>
+  </div>
+  <div class="foot"><span>MANIJA · Press kit</span><span>manijadj.com</span></div>
+</section>
+
+<script>
+  // ?lang=en → versión en inglés
+  if (new URLSearchParams(location.search).get('lang') === 'en') { document.documentElement.lang = 'en'; document.body.classList.add('en'); }
+</script>
+</body>
+</html>
