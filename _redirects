@@ -1,0 +1,5 @@
+# manijaexperience.com (reservado para la futura fiesta) lleva a la web principal
+https://manijaexperience.com/*      https://manijadj.com/:splat  301!
+https://www.manijaexperience.com/*  https://manijadj.com/:splat  301!
+http://manijaexperience.com/*       https://manijadj.com/:splat  301!
+http://www.manijaexperience.com/*   https://manijadj.com/:splat  301!
